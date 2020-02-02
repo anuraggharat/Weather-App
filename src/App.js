@@ -13,19 +13,24 @@ class App extends Component{
       city:undefined
     };
     this.getWeather();
- }
- 
-  // componentWillMount(){
-    
-  //   fetch('https:\\api.openweathermap.org/data/2.5/weather?q=London,uk&appid=${API_KEY}')
-  //   .then(res => res.json())
-  //   .then(data =>console.log(data))
-  // }
 
+ }
+  calCelsius(temp){
+    var cel = Math.floor(temp-273.15);
+    return cel;
+  }
   getWeather = async() =>{
     const api_call = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=London,uk&appid=${API_KEY}`)
     const response = await api_call.json();
     console.log(response)
+    this.setState({
+      city:response.name,
+      country:response.sys.country,
+      temp:this.calCelsius(response.main.temp),
+      max_temp:this.calCelsius(response.main.temp_max),
+      min_temp:this.calCelsius(response.main.temp_min),
+      weather:response.weather.main
+    })
   } 
 
   render(){
@@ -43,7 +48,7 @@ class App extends Component{
           placeholder="Search Country"
           name="country" 
           />
-          <button type="submit" className="btn btn-primary" onClick={this.getWeather}>
+          <button type="submit" className="btn btn-primary">
             Search
           </button>
 
@@ -52,10 +57,17 @@ class App extends Component{
       <div className="container">
         <div className="temp-show">
           <div className="weather-icon">
-            <i className="wi wi-night-sleet"></i>
+            <i className="wi wi-night-sleet display-1"></i>
+            <h2>{this.state.weather}</h2>
+          </div>
+          <div className="city-display">
+          <h1>{this.state.city},{this.state.country}</h1>
           </div>
           <div className="weather-temp">
-            <h1>31&#8451;</h1>
+            <h1>{this.state.temp}&deg;C</h1>
+          </div>
+          <div className="weather-temp-min-max">
+            <h1>{this.state.min_temp}&deg;C</h1><h1>{this.state.max_temp}&deg;C</h1>
           </div>
         </div>
       </div>

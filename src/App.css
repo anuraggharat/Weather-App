@@ -30,5 +30,26 @@
   padding: 20px;
   display: flex;
   flex-direction: column;
-  
+  color: white;
+}
+.temp-show>.weather-icon{
+  margin: 10px;
+}
+.temp-show>.city-display{
+  margin: 10px;
+
+}
+.temp-show>.city-display>h1{
+  letter-spacing: 12px;
+  font-size: 4rem;
+  font-family: 'Times New Roman', Times, serif;
+}
+.temp-show>.weather-temp>h2{
+  margin: 5px;
+  font-size: 2rem;
+}
+.temp-show>.weather-temp-min-max{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }
