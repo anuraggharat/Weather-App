@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 export default function App() {
-  return <div></div>;
+  useEffect(() => {}, []);
+
+  return <div className="app">Hello</div>;
 }
