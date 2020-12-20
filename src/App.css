@@ -1,9 +1,58 @@
 body {
   padding: 0px;
   margin: 0px;
-}
-.app {
+  box-sizing: border-box;
   height: 100vh;
   width: 100%;
-  background-image: linear-gradient(to top, #a3bded 0%, #6991c7 100%);
+  background-image: url("./images/bg3.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  font-family: "Source Sans Pro", sans-serif;
+}
+h1,
+h3,
+p {
+  margin: 0.2rem;
+}
+.app {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+.container {
+  vertical-align: middle;
+  align-self: center;
+  margin: auto 0px;
+  background-color: white;
+  width: 50vw;
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  padding: 40px;
+}
+.row {
+  padding: 0px 50px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+.col {
+  width: 50%;
+}
+h1 {
+  font-size: 6rem;
+}
+.row-2 {
+  display: flex;
+}
+.card {
+  width: 40%;
+  padding: 10px 0px;
+}
+h2 {
+  margin: 0px;
 }
