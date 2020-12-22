@@ -33,12 +33,42 @@ export default function App() {
     fetchCurrentWeather();
   }, []);
 
-  console.log();
+  const searchWeather = () => {
+    setLoading(true);
+    setError("");
+    try {
+      getWeather(place)
+        .then((res) => {
+          setCurrentWeather(res.current);
+          setLocation(res.location);
+        })
+        .catch((err) => setError("Something went wrong"))
+        .finally(() => setLoading(false));
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="app">
+      <div className="control">
+        <input
+          value={place}
+          onChange={(e) => setPlace(e.target.value)}
+          placeholder="Enter Location"
+        ></input>
+        <button onClick={() => searchWeather()}>
+          <RiSearchLine className="white" />
+        </button>
+      </div>
       {loading ? (
         <Loader />
+      ) : { error } ? (
+        <div className="container">
+          <div>
+            <h2>Couldn't find the location! Try Again</h2>
+          </div>
+        </div>
       ) : (
         <div className="container">
           <div className="row">
