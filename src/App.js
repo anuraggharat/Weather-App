@@ -8,41 +8,45 @@ export default function App() {
   const [currentWeather, setCurrentWeather] = useState({});
   const [place, setPlace] = useState("Mumbai");
   const [location, setLocation] = useState({});
-  const [error, setError] = useState("");
+  const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
 
   var d = new Date();
 
   const fetchCurrentWeather = () => {
     setLoading(true);
-    setError("");
+    setError(false);
     try {
       getWeather(place)
         .then((res) => {
           setCurrentWeather(res.current);
           setLocation(res.location);
         })
-        .catch((err) => setError("Something went wrong"))
+        .catch((err) => setError(true))
         .finally(() => setLoading(false));
     } catch (error) {
       console.log(error);
     }
   };
-
+  console.log(error);
   useEffect(() => {
     fetchCurrentWeather();
   }, []);
 
   const searchWeather = () => {
     setLoading(true);
-    setError("");
+    setError(false);
     try {
       getWeather(place)
         .then((res) => {
-          setCurrentWeather(res.current);
-          setLocation(res.location);
+          if (res["success"] == false) {
+            setError(true);
+          } else {
+            setCurrentWeather(res.current);
+            setLocation(res.location);
+          }
         })
-        .catch((err) => setError("Something went wrong"))
+        .catch((err) => setError(true))
         .finally(() => setLoading(false));
     } catch (error) {
       console.log(error);
@@ -63,7 +67,7 @@ export default function App() {
       </div>
       {loading ? (
         <Loader />
-      ) : { error } ? (
+      ) : error ? (
         <div className="container">
           <div>
             <h2>Couldn't find the location! Try Again</h2>
