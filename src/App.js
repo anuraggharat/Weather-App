@@ -25,10 +25,9 @@ export default function App() {
         .catch((err) => setError(true))
         .finally(() => setLoading(false));
     } catch (error) {
-      console.log(error);
+      setError(true);
     }
   };
-  console.log(error);
   useEffect(() => {
     fetchCurrentWeather();
   }, []);
@@ -39,7 +38,7 @@ export default function App() {
     try {
       getWeather(place)
         .then((res) => {
-          if (res["success"] == false) {
+          if (res["success"] === false) {
             setError(true);
           } else {
             setCurrentWeather(res.current);
