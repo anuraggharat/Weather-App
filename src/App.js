@@ -1,9 +1,12 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { getWeather } from "./Api";
+import Loader from "./Loader";
+import { RiSearchLine } from "react-icons/ri";
 
 export default function App() {
   const [currentWeather, setCurrentWeather] = useState({});
+  const [place, setPlace] = useState("Mumbai");
   const [location, setLocation] = useState({});
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -14,7 +17,7 @@ export default function App() {
     setLoading(true);
     setError("");
     try {
-      getWeather()
+      getWeather(place)
         .then((res) => {
           setCurrentWeather(res.current);
           setLocation(res.location);
@@ -34,7 +37,9 @@ export default function App() {
 
   return (
     <div className="app">
-      {!loading && (
+      {loading ? (
+        <Loader />
+      ) : (
         <div className="container">
           <div className="row">
             <div className="col">
